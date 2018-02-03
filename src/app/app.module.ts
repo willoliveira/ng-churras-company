@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
+import { LoginPageModule } from './pages/login/login.page.module';
 import { ListCompaniesPageModule } from './pages/company/list/list.page.module';
 import { NewCompanyPageModule } from './pages/company/new/new.page.module';
-import { LoginPageModule } from './pages/login/login.page.module';
 import { DashboardPageModule } from './pages/dashboard/dashboard.page.module';
 import { SignUpPageModule } from './pages/signup/signup.page.module';
 import { ListOrdersPageModule } from './pages/orders/list/list.page.module';
@@ -21,6 +21,7 @@ import { NewOrderComponent } from './pages/orders/new/new.page';
 import { AccountComponent } from './pages/account/account.page';
 import { SignupComponent } from './pages/signup/signup.page';
 import { ListCompaniesComponent } from './pages/company/list/list.page';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -36,11 +37,14 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent
   ],
   imports: [
-    RouterModule.forRoot(appRoutes, { enableTracing: true }),
-    BrowserModule, 
+    BrowserModule,
+    RouterModule.forRoot(appRoutes, { 
+      enableTracing: false 
+    }),
 
     LoginPageModule, SignUpPageModule,
     DashboardPageModule,
