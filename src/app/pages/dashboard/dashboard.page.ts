@@ -34,8 +34,4 @@ export class DashboardComponent implements OnInit {
 				}
 			});
 	}
-
-	// navToOrders() {
-	// 	this.router.navigate(["/orders/list"],)
-	// }
 }

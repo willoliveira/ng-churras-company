@@ -40,15 +40,28 @@ export class CompanyService {
 			);
 	}
 
-	createCompany() {
-
+	createCompany(company: Company): Observable<Company>  {
+		// return this.http
+		// 	.post<Company>("./assets/mocks/company.mock.json", company)
+		// 	.pipe(
+		// 		map(response => response["content"])
+		// 	);
+		return Observable.of(company);
 	}
 
-	editCompany() {
-
+	editCompany(company: Company): Observable<Company>  {
+		return this.http
+			.put<Company>("./assets/mocks/company.mock.json", company)
+			.pipe(
+				map(response => response["content"])
+			);
 	}
 
-	deleteCompany() {
-
+	deleteCompany(companyId) {
+		return this.http
+			.delete<Company>("./assets/mocks/company.mock.json",)
+			.pipe(
+				map(response => companyId)
+			);
 	}
 }

@@ -1,5 +1,6 @@
+import { OrderItem } from "./order-item";
+
 export interface Order {
-    id: String;
-    name: String;
-    price: String;
+    id: String,
+    Items: Array<OrderItem>,
 }

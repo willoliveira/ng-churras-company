@@ -1,6 +1,4 @@
-import { Order } from "./order";
-
 export interface OrderItem {
-    name: Order,
-    length: 1
+    name: String,
+    length: 1,
 }
