@@ -1,3 +1,20 @@
-<p>
-  dashboard works!
-</p>
+<h1>DashBoard</h1>
+
+<h2>Minhas Empresas</h2>
+
+<table>
+	<thead>
+		<tr>
+			<th>CNPJ</th>
+			<th>Nome Fantasia</th>
+			<th>Quantidade de pedidos</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let companyOrder of companyOrders">
+			<td>{{companyOrder.Company.CNPJ}}</td>
+			<td>{{companyOrder.Company.FantasyName}}</td>
+			<td><a [routerLink]="['/order/list']" [queryParams]="{CompanyId: companyOrder.Company.Id }">{{companyOrder.OrdersLength}}</a></td>
+		</tr>
+	</tbody>
+</table>
