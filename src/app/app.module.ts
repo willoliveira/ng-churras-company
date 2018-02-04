@@ -27,6 +27,7 @@ import { ListCompaniesComponent } from './pages/company/list/list.page';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 
 import { NavbarService } from './shared/components/navbar/navbar.service';
+import { FilterPipe } from './shared/pipes/filter.pipe';
 
 export const appRoutes: Routes = [
   { path: 'login', component: LoginComponent, data: { action: 'login' } },

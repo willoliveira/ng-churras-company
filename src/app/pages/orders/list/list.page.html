@@ -1,3 +1,44 @@
-<p>
-  list works!
-</p>
+<section>
+	
+	<h1>Meus Pedidos</h1>
+	<div *ngIf="!waitRequest && emptyOrders()">
+		Sem pedidos
+	</div>	
+	<div *ngIf="!waitRequest && !emptyOrders()">
+		<!-- TODO: fazer ainda! -->
+		<div class="fliter-table">
+			<h3>Filtre a lista de pedidos</h3>
+			<div class="md-input-group">
+				<label for="filter-cnpj" class="md-label">CNPJ</label>
+				<input id="filter-cnpj" class="md-input" type="text" placeholder="">
+			</div>
+			
+			<div class="md-input-group">
+				<label for="filter-order" class="md-label">Order</label>
+				<input id="filter-order" class="md-input" type="text" placeholder="">
+			</div>
+		</div>
+		
+		<table>
+			<thead>
+				<tr>
+					<th>Código do pedido</th>
+					<th>Itens do pedido</th>
+					<th>Ações</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let companyOrder of companyOrders.Orders | filter: 'order'">
+					<td>{{companyOrder.Id}}</td>
+					<td>
+						{{companyOrder}}
+						<p *ngFor="let orderItem of companyOrder.Items">
+							{{orderItem.length}}x {{orderItem.name}}
+						</p>
+					</td>
+					<td><button type="button" (click)="cancelOrder(companyOrder.id)">Cancelar</button></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</section>

@@ -1,0 +1,38 @@
+{
+    "content": {
+        "Company": {
+            "id": "1",                
+            "FantasyName": "Empresa top",
+            "CNPJ": "11111111"
+        },
+        "Orders": [
+            {
+                "Id": "1",
+                "Items": [
+                    { "name": "Carvão", "length": 1},
+                    { "name": "Cerveja", "length": 15},
+                    { "name": "Carne", "length": 29},
+                    { "name": "Guardanapo", "length": 2}
+                ]
+            },
+            {
+                "Id": "2",
+                "Items": [
+                    { "name": "Carvão", "length": 1},
+                    { "name": "Cerveja", "length": 15},
+                    { "name": "Carne", "length": 13},
+                    { "name": "Guardanapo", "length": 2}
+                ]
+            },
+            {
+                "Id": "3",
+                "Items": [
+                    { "name": "Carvão", "length": 1},
+                    { "name": "Cerveja", "length": 35},
+                    { "name": "Carne", "length": 4},
+                    { "name": "Guardanapo", "length": 6}
+                ]
+            }
+        ]
+    }
+}

@@ -14,7 +14,13 @@ import { CompanyOrders } from '../../../shared/models/company-orders';
 export class ListOrdersComponent implements OnInit, OnDestroy {
 
 	sub: Subscription;
-	companyOrder: CompanyOrders;
+	companyOrders: CompanyOrders;
+	waitRequest: boolean = true;
+
+	filter = {
+		CNPJ: "",
+		order: ""
+	}
 
 	constructor(
 		private route: ActivatedRoute, 
@@ -36,10 +42,23 @@ export class ListOrdersComponent implements OnInit, OnDestroy {
 		this.sub.unsubscribe();
 	}
 
-	getOrders(CompanyId: String) {
+	private getOrders(CompanyId: String) {
 		this.companyService.getCompanyOrders(CompanyId)
-			.subscribe((order: CompanyOrders) => {
-				this.companyOrder = order;
+			.subscribe((order: any) => {
+				this.companyOrders = order;
+				this.waitRequest = false;
 			});
+	}
+
+	private cancelOrder(OrderId: String) {
+		this.companyService.cancelCompanyOrder(OrderId)
+			.subscribe((orderId) => {
+				let orderIndex = this.companyOrders.Orders.map(order => order.id).indexOf(OrderId);
+				this.companyOrders.Orders.splice(orderIndex, 1);
+			})
+	}
+
+	private emptyOrders(): boolean {
+		return this.companyOrders ? this.companyOrders.Orders.length === 0 : true;
 	}
 }

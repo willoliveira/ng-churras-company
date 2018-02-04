@@ -1,16 +1,22 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
 import { ListOrdersComponent } from './list.page';
+import { FilterPipe } from '../../../shared/pipes/filter.pipe';
 
 @NgModule({
   declarations: [
-    ListOrdersComponent
+    ListOrdersComponent,
+    FilterPipe
   ],
   exports: [
     ListOrdersComponent
   ],
   imports: [
-    
+    CommonModule
   ],
-  providers: []
+  providers: [
+    
+  ]
 })
 export class ListOrdersPageModule { }
