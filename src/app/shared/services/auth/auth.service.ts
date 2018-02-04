@@ -13,4 +13,8 @@ export class AuthService {
 	login(user: User): Observable<any> {
 		return Observable.of(user);
 	}
+
+	signup(user: User): Observable<any> {
+		return Observable.of(user);		
+	}
 }

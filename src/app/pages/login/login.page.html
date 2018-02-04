@@ -8,6 +8,7 @@
                 <a routerLink="/signup" routerLinkActive="active">Sign up</a>                    
             </div>
         </div>
+        
         <div class="card-body" >
             <form [formGroup]="loginForm" novalidate>                    
                 <div class="md-input-group">
@@ -32,7 +33,7 @@
             </form>
         </div>
         <div class="card-footer">
-            <button full class="md-button" type="button" (click)="onSubmit(loginForm.value)">Sign up</button>        
+            <button full class="md-button" type="button" (click)="onSubmit(loginForm.value)">Sign up</button>
         </div>
     </div>
 </section>

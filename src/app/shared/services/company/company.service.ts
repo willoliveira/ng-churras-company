@@ -5,15 +5,16 @@ import { Company } from '../../models/company.model';
 import { CompanyOrders } from '../../models/company-orders';
 
 import { map } from 'rxjs/operators';
+import { CompanyOrdersCount } from '../../models/company-orders-count.';
 
 @Injectable()
 export class CompanyService {
 	
 	constructor(private http: HttpClient) { }
 	
-	getCompanyOrdersCount(): Observable<Array<CompanyOrders>> {
+	getCompanyOrdersCount(): Observable<Array<CompanyOrdersCount>> {
 		return this.http
-			.get<Array<CompanyOrders>>("./assets/mocks/company-orders-count.mock.json")
+			.get<Array<CompanyOrdersCount>>("./assets/mocks/company-orders-count.mock.json")
 			.pipe(
 				map(response => response["content"])
 			);

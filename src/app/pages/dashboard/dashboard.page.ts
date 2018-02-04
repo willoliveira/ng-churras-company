@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CompanyService } from '../../shared/services/company/company.service';
-import { CompanyOrders } from '../../shared/models/company-orders';
 import { Subscription } from 'rxjs/Subscription';
+import { CompanyOrdersCount } from '../../shared/models/company-orders-count.';
 
 @Component({
 	selector: 'app-dashboard',
@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class DashboardComponent implements OnInit {
 	
-	companyOrders: Array<CompanyOrders> = [];
+	companyOrders: Array<CompanyOrdersCount> = [];
 	sub: Subscription;
 
 	constructor(
@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
 	
 	getCompaniesOrders() {
 		this.companyService
-			.getCompanyOrders()
+			.getCompanyOrdersCount()
 			.subscribe(response => {
 				if (response) {
 					this.companyOrders = response;

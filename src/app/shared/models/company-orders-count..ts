@@ -1,6 +1,6 @@
 import { Company } from "./company.model";
 
-export interface CompanyOrders {
+export interface CompanyOrdersCount {
     Company: Company,
     OrdersLength: Number
 }
