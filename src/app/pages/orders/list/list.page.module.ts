@@ -5,6 +5,9 @@ import { ListOrdersComponent } from './list.page';
   declarations: [
     ListOrdersComponent
   ],
+  exports: [
+    ListOrdersComponent
+  ],
   imports: [
     
   ],

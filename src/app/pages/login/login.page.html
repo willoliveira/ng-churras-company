@@ -1,25 +1,38 @@
 <section id="container-login">
     <div id="bg-login"></div>
-    <div class="card">
-        <div class="card-title">
-            <h1>Login</h1>
+    <div id="card-login" class="card">
+        <div class="card-header">
+            <h1 class="card-title">Login</h1>
             <div class="link-sign">
                 <i class="material-icons">person</i>
                 <a routerLink="/signup" routerLinkActive="active">Sign up</a>                    
             </div>
         </div>
-        <div class="card-body">
-            <div class="md-input-group">
-                <label for="login-user" class="md-label"></label>
-                <input id="login-user" class="md-input" type="text">
-            </div>
-            <div class="md-input-group">
-                <label for="login-pass" class="md-label"></label>
-                <input id="login-pass" class="md-input" type="password">
-            </div>
+        <div class="card-body" >
+            <form [formGroup]="loginForm" novalidate>                    
+                <div class="md-input-group">
+                    <label for="login-email" class="md-label"></label>
+                    <input id="login-email" class="md-input" type="text" placeholder="Insira seu e-mail" formControlName="email"> 
+                    
+                    <div class="alert alert-danger" *ngIf="loginForm.controls.email.invalid && (loginForm.controls.email.dirty || loginForm.controls.email.touched)">
+                        <div *ngIf="loginForm.controls.email.errors && loginForm.controls.email.errors.required">
+                            Login is required.
+                        </div>
+                    </div>
+                </div>
+                <div class="md-input-group">
+                    <label for="login-pass" class="md-label"></label>
+                    <input id="login-pass" class="md-input" type="password"  placeholder="Insira sua senha" formControlName="password"/>
+                    <div class="alert alert-danger" *ngIf="(loginForm.controls.password.dirty || loginForm.controls.password.touched)">
+                        <div *ngIf="loginForm.controls.password.errors && loginForm.controls.password.errors.required">
+                            Password is required.
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
         <div class="card-footer">
-            <button class="md-button">Sign up</button>
+            <button full class="md-button" type="button" (click)="onSubmit(loginForm.value)">Sign up</button>        
         </div>
     </div>
 </section>

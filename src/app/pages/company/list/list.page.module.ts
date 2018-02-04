@@ -5,6 +5,9 @@ import { ListCompaniesComponent } from './list.page';
   declarations: [
     ListCompaniesComponent
   ],
+  exports: [
+    ListCompaniesComponent
+  ],
   imports: [
     
   ],

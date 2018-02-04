@@ -6,6 +6,9 @@ import { AccountComponent } from './account.page';
   declarations: [
     AccountComponent
   ],
+  exports: [
+    AccountComponent
+  ],
   imports: [
     
   ],

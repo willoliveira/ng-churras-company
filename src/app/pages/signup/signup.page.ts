@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavbarService } from '../../shared/components/navbar/navbar.service';
 
 @Component({
   selector: 'app-signup',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignupComponent implements OnInit {
 
-  constructor() { }
+  constructor(public navService: NavbarService) { }
 
   ngOnInit() {
+    this.navService.hide();
   }
 
 }

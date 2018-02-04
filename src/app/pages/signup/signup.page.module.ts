@@ -6,6 +6,9 @@ import { RouterModule } from '@angular/router';
   declarations: [
     SignupComponent
   ],
+  exports: [
+    SignupComponent
+  ],
   imports: [
     RouterModule
   ],

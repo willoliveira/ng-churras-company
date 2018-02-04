@@ -5,6 +5,9 @@ import { NewOrderComponent } from './new.page';
   declarations: [
     NewOrderComponent
   ],
+  exports: [
+    NewOrderComponent
+  ],
   imports: [
     
   ],

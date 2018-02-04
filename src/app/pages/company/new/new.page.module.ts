@@ -7,6 +7,9 @@ import { NewCompanyComponent } from './new.page';
   declarations: [
     NewCompanyComponent
   ],
+  exports: [
+    NewCompanyComponent
+  ],
   imports: [
     
   ],

@@ -7,6 +7,9 @@ import { DashboardComponent } from './dashboard.page';
   declarations: [
     DashboardComponent
   ],
+  exports: [
+    DashboardComponent
+  ],
   imports: [
     
   ],
