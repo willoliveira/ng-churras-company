@@ -4,25 +4,34 @@ import { Observable } from 'rxjs/Observable';
 import { Company } from '../../models/company.model';
 import { CompanyOrders } from '../../models/company-orders';
 
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { CompanyOrdersCount } from '../../models/company-orders-count.';
+import { api_url } from '../Config';
 
 @Injectable()
 export class CompanyService {
 	
 	constructor(private http: HttpClient) { }
 	
+	/** 
+	 * assets/mocks/company-orders-count.mock.json
+	*/
 	getCompanyOrdersCount(): Observable<Array<CompanyOrdersCount>> {
 		return this.http
-			.get<Array<CompanyOrdersCount>>("./assets/mocks/company-orders-count.mock.json")
+			.get<Array<CompanyOrdersCount>>(`${api_url}/v1/order/companies`)
 			.pipe(
-				map(response => response["content"])
+				map(response => {
+					return response["content"].map((companyOrder) => ({
+						Company: companyOrder.Company,
+						OrdersLength: companyOrder.Orders.length
+					}))
+				})
 			);
 	}
 
 	getCompanyOrders(CompanyId): Observable<Array<CompanyOrders>|CompanyOrders> {
 		return this.http
-			.get<Array<CompanyOrders>>("./assets/mocks/company-orders.mock.json")
+			.get<Array<CompanyOrders>>(`${api_url}/v1/order/companies`)
 			.pipe(
 				map(response => response["content"])
 			);

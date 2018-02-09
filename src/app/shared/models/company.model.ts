@@ -1,4 +1,4 @@
 export interface Company {
-    FantasyName: String,
+    nameFantasy: String,
     CNPJ: String
 }

@@ -8,29 +8,32 @@
         "Orders": [
             {
                 "Id": "1",
+                "_companyId": "1",
                 "Items": [
-                    { "name": "Carvão", "length": 1},
-                    { "name": "Cerveja", "length": 15},
-                    { "name": "Carne", "length": 29},
-                    { "name": "Guardanapo", "length": 2}
+                    { "name": "Carvão", "amount": 1},
+                    { "name": "Cerveja", "amount": 15},
+                    { "name": "Carne", "amount": 29},
+                    { "name": "Guardanapo", "amount": 2}
                 ]
             },
             {
                 "Id": "2",
+                "_companyId": "1",                
                 "Items": [
-                    { "name": "Carvão", "length": 1},
-                    { "name": "Cerveja", "length": 15},
-                    { "name": "Carne", "length": 13},
-                    { "name": "Guardanapo", "length": 2}
+                    { "name": "Carvão", "amount": 1},
+                    { "name": "Cerveja", "amount": 15},
+                    { "name": "Carne", "amount": 13},
+                    { "name": "Guardanapo", "amount": 2}
                 ]
             },
             {
                 "Id": "3",
+                "_companyId": "1",
                 "Items": [
-                    { "name": "Carvão", "length": 1},
-                    { "name": "Cerveja", "length": 35},
-                    { "name": "Carne", "length": 4},
-                    { "name": "Guardanapo", "length": 6}
+                    { "name": "Carvão", "amount": 1},
+                    { "name": "Cerveja", "amount": 35},
+                    { "name": "Carne", "amount": 4},
+                    { "name": "Guardanapo", "amount": 6}
                 ]
             }
         ]

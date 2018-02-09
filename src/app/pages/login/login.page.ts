@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
 	
 	onSubmit(user: User) {
 		if (this.loginForm.valid) {
-			this.authService.login(user).subscribe(respose => {
+			this.authService.signin(user).subscribe(respose => {
 				this.router.navigate(["/dashboard"]).then(() => {
 					this.navService.show();		
 				});

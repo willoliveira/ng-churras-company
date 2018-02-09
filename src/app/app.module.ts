@@ -28,6 +28,7 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
 
 import { NavbarService } from './shared/components/navbar/navbar.service';
 import { FilterPipe } from './shared/pipes/filter.pipe';
+import { InjectTokenProvider } from './shared/services/auth/auth.interceptor';
 
 export const appRoutes: Routes = [
   { path: 'login', component: LoginComponent, data: { action: 'login' } },
@@ -62,7 +63,7 @@ export const appRoutes: Routes = [
     
   ],
   providers: [
-    NavbarService
+    NavbarService, InjectTokenProvider
   ],
   bootstrap: [AppComponent]
 })
