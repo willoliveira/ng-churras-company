@@ -2,6 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+
+import { ElModule } from 'element-angular';
 
 import { AppComponent } from './app.component';
 
@@ -30,41 +33,45 @@ import { NavbarService } from './shared/components/navbar/navbar.service';
 import { FilterPipe } from './shared/pipes/filter.pipe';
 import { InjectTokenProvider } from './shared/services/auth/auth.interceptor';
 
+import 'element-angular/theme/index.css';
+
 export const appRoutes: Routes = [
-  { path: 'login', component: LoginComponent, data: { action: 'signin' } },
-  { path: 'signup', component: SignupComponent, data: { action: 'create' } },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'company/new', component: NewCompanyComponent },
-  { path: 'company/list', component: ListCompaniesComponent },
-  { path: 'order/new', component: NewOrderComponent },
-  { path: 'order/list', component: ListOrdersComponent },
-  { path: 'account', component: SignupComponent, data: { action: 'update' }  },
-  { path: '', redirectTo: '/login', pathMatch: 'full' }
+	{ path: 'login', component: LoginComponent, data: { action: 'signin' } },
+	{ path: 'signup', component: SignupComponent, data: { action: 'create' } },
+	{ path: 'dashboard', component: DashboardComponent },
+	{ path: 'company/new', component: NewCompanyComponent },
+	{ path: 'company/list', component: ListCompaniesComponent },
+	{ path: 'order/new', component: NewOrderComponent },
+	{ path: 'order/list', component: ListOrdersComponent },
+	{ path: 'account', component: SignupComponent, data: { action: 'update' }  },
+	{ path: '', redirectTo: '/login', pathMatch: 'full' }
 ]
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent
-  ],
-  imports: [
-    CommonModule,
-    BrowserModule,
-    RouterModule.forRoot(appRoutes, { 
-      enableTracing: false 
-    }),
+	declarations: [
+		AppComponent,
+		NavbarComponent
+	],
+	imports: [
+		CommonModule,
+		BrowserModule,
+		RouterModule.forRoot(appRoutes, { 
+			enableTracing: false 
+		}),
+		BrowserAnimationsModule,
+		
+		ElModule.forRoot(),
 
-    LoginPageModule, SignUpPageModule,
-    DashboardPageModule,
-    AccountPageModule, 
-    
-    ListCompaniesPageModule, NewCompanyPageModule,
-    ListOrdersPageModule, NewOrderPageModule,
-    
-  ],
-  providers: [
-    NavbarService, InjectTokenProvider
-  ],
-  bootstrap: [AppComponent]
+		LoginPageModule, SignUpPageModule,
+		DashboardPageModule,
+		AccountPageModule, 
+		
+		ListCompaniesPageModule, NewCompanyPageModule,
+		ListOrdersPageModule, NewOrderPageModule
+	],
+	providers: [
+		NavbarService, InjectTokenProvider
+	],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }

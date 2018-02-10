@@ -7,13 +7,17 @@ import { LoginComponent } from './login.page';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../shared/services/auth/auth.service';
 
+import { ElModule } from 'element-angular';
+
 @NgModule({
 	declarations: [ LoginComponent ],
 	exports: [ LoginComponent ],
 	imports: [ 
 		CommonModule,
 		ReactiveFormsModule, FormsModule,
-		RouterModule
+		RouterModule,
+
+		ElModule.forRoot()
 	],
 	providers: [
 		AuthService

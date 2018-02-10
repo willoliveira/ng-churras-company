@@ -1,39 +1,28 @@
 <section id="container-login">
-    <div id="bg-login"></div>
-    <div id="card-login" class="card">
-        <div class="card-header">
-            <h1 class="card-title">Login</h1>
-            <div class="link-sign">
-                <i class="material-icons">person</i>
-                <a routerLink="/signup" routerLinkActive="active">Sign up</a>                    
-            </div>
-        </div>
-        
-        <div class="card-body" >
-            <form [formGroup]="loginForm" novalidate>                    
-                <div class="md-input-group">
-                    <label for="login-email" class="md-label"></label>
-                    <input id="login-email" class="md-input" type="text" placeholder="Insira seu e-mail" formControlName="email"> 
-                    
-                    <div class="alert alert-danger" *ngIf="loginForm.controls.email.invalid && (loginForm.controls.email.dirty || loginForm.controls.email.touched)">
-                        <div *ngIf="loginForm.controls.email.errors && loginForm.controls.email.errors.required">
-                            Login is required.
-                        </div>
-                    </div>
-                </div>
-                <div class="md-input-group">
-                    <label for="login-pass" class="md-label"></label>
-                    <input id="login-pass" class="md-input" type="password"  placeholder="Insira sua senha" formControlName="password"/>
-                    <div class="alert alert-danger" *ngIf="(loginForm.controls.password.dirty || loginForm.controls.password.touched)">
-                        <div *ngIf="loginForm.controls.password.errors && loginForm.controls.password.errors.required">
-                            Password is required.
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="card-footer">
-            <button full class="md-button" type="button" (click)="onSubmit(loginForm.value)">Sign in</button>
-        </div>
-    </div>
+	<div id="bg-login"></div>
+	<el-card class="box-card" style="width: 400px"> 
+		<ng-template #header>
+			<div class="clearfix">
+				<span class="card-title" style="line-height: 36px;">Login</span>
+				<el-button routerLink="/signup" routerLinkActive="active" style="float: right;" type="primary">Sign up</el-button>
+			</div>
+		</ng-template>
+		
+		<div class="card-body" >
+			<el-form [formGroup]="loginForm" label-width="100px">
+				<el-form-item label="E-mail" [required]="true">
+					<el-input formControlName="email" native-type="text"></el-input>
+				</el-form-item>
+
+				<el-form-item label="Password" [required]="true">
+					<el-input formControlName="password" native-type="password"></el-input>
+				</el-form-item>
+				
+				<el-form-item>
+					<el-button type="primary" (click)="onSubmit(loginForm.value)">Sign in</el-button>
+				</el-form-item>
+			</el-form>
+		</div>
+		
+	</el-card>
 </section>

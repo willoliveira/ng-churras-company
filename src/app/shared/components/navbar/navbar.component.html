@@ -1,25 +1,15 @@
-<nav *ngIf="navService.visible" class="nav-bar">
-	<ul class="menu">
-		<li class="menu-item">
-			<a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
-		</li>
-		<li class="menu-item">
-			Company
-			<ul class="submenu">
-				<li><a routerLink="/company/new" routerLinkActive="active">New company</a></li>
-				<li><a routerLink="/company/list" routerLinkActive="active">List companies</a></li>
-			</ul>
-		</li>
-		<li class="menu-item">
-			Orders
-			<ul class="submenu">
-				<li><a routerLink="/order/new" routerLinkActive="active">New order</a></li>
-				<!-- TODO: Fazer listagem para todos os pedidos de todas as empresas -->
-				<!-- <li><a routerLink="/order/list" routerLinkActive="active">List orders</a></li> -->
-			</ul>
-		</li>
-		<li class="menu-item">
-			<a routerLink="/account" routerLinkActive="active">Account</a>
-		</li>
-	</ul>
-</nav>
+<el-menu *ngIf="navService.visible" class="nav-bar" mode="horizontal">
+	<el-menu-item index="1"><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></el-menu-item>
+	
+	<el-submenu index="2" class="submenu" title="Company">
+		<el-menu-item index="2-1"><a routerLink="/company/new" routerLinkActive="active">New company</a></el-menu-item>
+		<el-menu-item index="2-1"><a routerLink="/company/list" routerLinkActive="active">List companies</a></el-menu-item>
+	</el-submenu>
+
+	<el-submenu index="2" title="Orders">
+		<el-menu-item index="2-1"><a routerLink="/order/new" routerLinkActive="active">New order</a></el-menu-item>
+		<el-menu-item index="2-1"><a routerLink="/order/list" routerLinkActive="active">List orders</a></el-menu-item>
+	</el-submenu>
+
+	<el-menu-item><a routerLink="/account" routerLinkActive="active">Account</a></el-menu-item>
+</el-menu>
