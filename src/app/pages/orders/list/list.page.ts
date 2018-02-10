@@ -43,6 +43,7 @@ export class ListOrdersComponent implements OnInit, OnDestroy {
 	}
 
 	private getOrders(CompanyId: String) {
+		console.log(CompanyId);
 		this.companyService.getCompanyOrders(CompanyId)
 			.subscribe((order: any) => {
 				this.companyOrders = order;

@@ -1,3 +1,48 @@
-<p>
-  new works!
-</p>
+<section>
+	<div *ngIf="listCompanies.length">
+		<div class="md-input-group">
+			<select [(ngModel)]="selectedCompany" id="list-companies" class="md-input">
+				<option *ngFor="let company of listCompanies" [ngValue]="company">
+					{{company.socialName}}
+				</option>
+			</select>
+		</div>
+	</div>
+	<div *ngIf="listProducts.length">
+		<div class="md-input-group">
+			<select [(ngModel)]="selectedItem" id="list-products" class="md-input">
+				<option *ngFor="let product of listProducts" [ngValue]="product">
+					{{product.name}}
+				</option>
+			</select>
+		</div>
+		<div class="md-input-group">
+			<label for="amount" class="md-label"></label>
+			<input [(ngModel)]="amount" id="amount" class="md-input" type="text"> 
+		</div>
+		<button (click)="addItem()">Adicionar</button>
+	</div>
+	<div id="list-orders">
+		<table>
+			<thead>
+				<tr>
+					<td>Produto</td>
+					<td>Quantidade</td>
+					<td>Ação</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngIf="!listItems.length">
+					<td colspan="3">Sem itens adicionandos</td>
+				</tr>
+				<tr *ngFor="let item of listItems">
+					<td>{{item.name}}</td>
+					<td>{{item.amout}}</td>
+					<td>X</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<button (click)="onSubmit()">Fechar pedido</button>
+</section>

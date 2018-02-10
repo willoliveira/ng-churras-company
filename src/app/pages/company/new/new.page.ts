@@ -25,7 +25,10 @@ export class NewCompanyComponent implements OnInit {
 	ngOnInit() {
 		this.companyForm = this.fb.group({
 			nameFantasy: ['', Validators.required],
-			cnpj: ['', Validators.required]
+			socialName: ['', Validators.required],
+			about: ['', Validators.required],
+			createDate: [''],
+			CNPJ: ['', Validators.required]
 		});
 	}
 

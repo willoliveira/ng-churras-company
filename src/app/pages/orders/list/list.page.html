@@ -28,12 +28,11 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr *ngFor="let companyOrder of companyOrders.Orders | filter: 'order'">
-					<td>{{companyOrder.Id}}</td>
+				<tr *ngFor="let companyOrder of companyOrders.Orders | filter: order">
+					<td>{{companyOrder._id}}</td>
 					<td>
-						{{companyOrder}}
 						<p *ngFor="let orderItem of companyOrder.Items">
-							{{orderItem.length}}x {{orderItem.name}}
+							{{orderItem.amount}}x {{orderItem.name}}
 						</p>
 					</td>
 					<td><button type="button" (click)="cancelOrder(companyOrder.id)">Cancelar</button></td>

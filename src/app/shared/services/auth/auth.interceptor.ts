@@ -15,7 +15,6 @@ export class InjectToken implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler) {
 
         const isIgnoreUrl = auth_ignore_urls.find((url: String) => {
-            console.log(url, request.url.toString());
             return !!url.match(request.url.toString())
         });
 

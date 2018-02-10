@@ -14,7 +14,7 @@
 		<tr *ngFor="let companyOrder of companyOrders">
 			<td>{{companyOrder.Company.CNPJ}}</td>
 			<td>{{companyOrder.Company.nameFantasy}}</td>
-			<td><a [routerLink]="['/order/list']" [queryParams]="{CompanyId: companyOrder.Company.Id }">{{companyOrder.OrdersLength}}</a></td>
+			<td><a [routerLink]="['/order/list']" [queryParams]="{'CompanyId': companyOrder.Company._id }">{{companyOrder.OrdersLength}}</a></td>
 		</tr>
 	</tbody>
 </table>

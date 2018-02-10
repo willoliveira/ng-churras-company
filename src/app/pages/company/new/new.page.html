@@ -4,7 +4,7 @@
 
 	<form [formGroup]="companyForm" novalidate>                    
 		<div class="md-input-group">
-			<label for="name-fantasy" class="md-label"></label>
+			<label for="name-fantasy" class="md-label">nameFantasy</label>
 			<input id="name-fantasy" class="md-input" type="text" placeholder="Insira o nome fantasia" formControlName="nameFantasy"> 
 			
 			<div class="alert alert-danger" *ngIf="companyForm.controls.nameFantasy.invalid && (companyForm.controls.nameFantasy.dirty || companyForm.controls.nameFantasy.touched)">
@@ -14,11 +14,41 @@
 			</div>
 		</div>
 		<div class="md-input-group">
-			<label for="cnpj" class="md-label"></label>
-			<input id="cnpj" class="md-input" type="text"  placeholder="Insira o cnpj" formControlName="cnpj"/>
-			<div class="alert alert-danger" *ngIf="(companyForm.controls.cnpj.dirty || companyForm.controls.cnpj.touched)">
-				<div *ngIf="companyForm.controls.cnpj.errors && companyForm.controls.cnpj.errors.required">
-					cnpj is required.
+			<label for="socialName" class="md-label">socialName</label>
+			<input id="socialName" class="md-input" type="text"  placeholder="Insira o socialName" formControlName="socialName"/>
+			<div class="alert alert-danger" *ngIf="(companyForm.controls.socialName.dirty || companyForm.controls.socialName.touched)">
+				<div *ngIf="companyForm.controls.socialName.errors && companyForm.controls.socialName.errors.required">
+					socialName is required.
+				</div>
+			</div>
+		</div>
+
+		<div class="md-input-group">
+			<label for="about" class="md-label">about</label>
+			<input id="about" class="md-input" type="text"  placeholder="Insira o about" formControlName="about"/>
+			<div class="alert alert-danger" *ngIf="(companyForm.controls.about.dirty || companyForm.controls.about.touched)">
+				<div *ngIf="companyForm.controls.about.errors && companyForm.controls.about.errors.required">
+					About is required.
+				</div>
+			</div>
+		</div>
+
+		<div class="md-input-group">
+			<label for="createDate" class="md-label">createDate</label>
+			<input id="createDate" class="md-input" type="text"  placeholder="Insira o createDate" formControlName="createDate"/>
+			<div class="alert alert-danger" *ngIf="(companyForm.controls.createDate.dirty || companyForm.controls.createDate.touched)">
+				<div *ngIf="companyForm.controls.createDate.errors && companyForm.controls.createDate.errors.required">
+					createDate is required.
+				</div>
+			</div>
+		</div>
+
+		<div class="md-input-group">
+			<label for="CNPJ" class="md-label">CNPJ</label>
+			<input id="CNPJ" class="md-input" type="text"  placeholder="Insira o CNPJ" formControlName="CNPJ"/>
+			<div class="alert alert-danger" *ngIf="(companyForm.controls.CNPJ.dirty || companyForm.controls.CNPJ.touched)">
+				<div *ngIf="companyForm.controls.CNPJ.errors && companyForm.controls.CNPJ.errors.required">
+					CNPJ is required.
 				</div>
 			</div>
 		</div>

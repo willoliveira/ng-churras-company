@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 
 import { SignupComponent } from './signup.page';
 import { AuthService } from '../../shared/services/auth/auth.service';
+import { UserService } from '../../shared/services/user/user.service';
 
 @NgModule({
 	declarations: [
@@ -19,7 +20,7 @@ import { AuthService } from '../../shared/services/auth/auth.service';
 		CommonModule
 	],
 	providers: [
-		AuthService
+		AuthService, UserService
 	]
 })
 export class SignUpPageModule { }

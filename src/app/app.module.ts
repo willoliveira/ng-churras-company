@@ -31,14 +31,14 @@ import { FilterPipe } from './shared/pipes/filter.pipe';
 import { InjectTokenProvider } from './shared/services/auth/auth.interceptor';
 
 export const appRoutes: Routes = [
-  { path: 'login', component: LoginComponent, data: { action: 'login' } },
-  { path: 'signup', component: SignupComponent, data: { action: 'signup' } },
+  { path: 'login', component: LoginComponent, data: { action: 'signin' } },
+  { path: 'signup', component: SignupComponent, data: { action: 'create' } },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'company/new', component: NewCompanyComponent },
   { path: 'company/list', component: ListCompaniesComponent },
   { path: 'order/new', component: NewOrderComponent },
   { path: 'order/list', component: ListOrdersComponent },
-  { path: 'account', component: AccountComponent },
+  { path: 'account', component: SignupComponent, data: { action: 'update' }  },
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ]
 
