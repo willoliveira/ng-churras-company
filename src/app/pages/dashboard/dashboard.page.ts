@@ -24,6 +24,11 @@ export class DashboardComponent implements OnInit {
 	ngOnInit() {
 		this.getCompaniesOrders();
 	}
+
+	print(scope) {
+		// console.log(scope);
+		console.log(scope.rowData);
+	}
 	
 	getCompaniesOrders() {
 		this.companyService
@@ -31,6 +36,7 @@ export class DashboardComponent implements OnInit {
 			.subscribe(response => {
 				if (response) {
 					this.companyOrders = response;
+					console.log(response);
 				}
 			});
 	}

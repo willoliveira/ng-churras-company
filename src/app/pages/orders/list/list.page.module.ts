@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { ListOrdersComponent } from './list.page';
 import { FilterPipe } from '../../../shared/pipes/filter.pipe';
 
+import { ElModule } from 'element-angular';
+
 @NgModule({
   declarations: [
     ListOrdersComponent,
@@ -13,7 +15,7 @@ import { FilterPipe } from '../../../shared/pipes/filter.pipe';
     ListOrdersComponent
   ],
   imports: [
-    CommonModule
+    CommonModule, ElModule
   ],
   providers: [
     

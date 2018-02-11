@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard.page';
 import { RouterModule } from '@angular/router';
 import { CompanyService } from '../../shared/services/company/company.service';
 
+import { ElModule } from 'element-angular';
 
 @NgModule({
 	declarations: [
@@ -17,7 +18,9 @@ import { CompanyService } from '../../shared/services/company/company.service';
 	imports: [
 		CommonModule,
 		RouterModule,
-		HttpClientModule
+		HttpClientModule,
+
+		ElModule
 	],
 	providers: [
 		CompanyService

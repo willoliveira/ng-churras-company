@@ -8,7 +8,7 @@
 		<!-- TODO: fazer ainda! -->
 		<div class="fliter-table">
 			<h3>Filtre a lista de pedidos</h3>
-			<div class="md-input-group">
+			<!-- <div class="md-input-group">
 				<label for="filter-cnpj" class="md-label">CNPJ</label>
 				<input id="filter-cnpj" class="md-input" type="text" placeholder="">
 			</div>
@@ -16,10 +16,43 @@
 			<div class="md-input-group">
 				<label for="filter-order" class="md-label">Order</label>
 				<input id="filter-order" class="md-input" type="text" placeholder="">
-			</div>
+			</div> -->
+
+			<el-form [inline]="true" size="small">
+
+				<el-form-item label="CNPJ">
+					<el-input></el-input>
+				</el-form-item>
+				
+				<el-form-item label="Order">
+					<el-input></el-input>
+				</el-form-item>
+				
+				<el-form-item>
+					<el-button type="primary">Filtrar</el-button>
+				</el-form-item>
+				
+			</el-form>
 		</div>
 		
-		<table>
+		<el-table [model]="companyOrders.Orders" [stripe]="true">
+
+			<el-table-column model-key="_id" label="Numero do pedido" width="140"></el-table-column>
+			<el-table-column model-key="" label="Itens do pedido" width="300">
+				<ng-template #slot let-scope="scope">
+					<p *ngFor="let orderItem of companyOrders.Orders[scope.index].Items">
+						{{orderItem.amount}}x {{orderItem.name}}
+					</p>
+				</ng-template>
+			</el-table-column>
+			<el-table-column model-key="" label="Itens do pedido" width="140">
+				<ng-template #slot let-scope="scope">
+					<el-button type="primary" (click)="cancelOrder(companyOrders.Orders[scope.index].id)">Cancelar</el-button>
+				</ng-template>
+			</el-table-column>
+		</el-table>
+
+		<!-- <table>
 			<thead>
 				<tr>
 					<th>Código do pedido</th>
@@ -38,6 +71,6 @@
 					<td><button type="button" (click)="cancelOrder(companyOrder.id)">Cancelar</button></td>
 				</tr>
 			</tbody>
-		</table>
+		</table> -->
 	</div>
 </section>
