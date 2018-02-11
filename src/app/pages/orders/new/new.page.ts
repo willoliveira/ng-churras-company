@@ -3,7 +3,11 @@ import { CompanyService } from '../../../shared/services/company/company.service
 import { ItemService } from '../../../shared/services/item/item.service';
 import { Company } from '../../../shared/models/company.model';
 import { Subscription } from 'rxjs/Subscription';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
+import { ElMessageService } from 'element-angular'
+import { NavbarService } from '../../../shared/components/navbar/navbar.service';
 
 @Component({
 	selector: 'new-order',
@@ -12,55 +16,61 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class NewOrderComponent implements OnInit {
 
+	newOrderForm: FormGroup;
+
 	sub: Subscription;
 	
 	waitRequest = true;
 	
 	listCompanies: Array<Company> = [];
 	listProducts = [];
-
+	
 	listItems = [];
-
-	selectedCompany: Company;
-	selectedProduct;
-	amount;
-
+	
 	constructor(
 		private route: ActivatedRoute,
+		private router: Router,
 		private companyService: CompanyService,
-		private itemService: ItemService
+		private itemService: ItemService,
+		private fb: FormBuilder,
+		private messageService: ElMessageService,
+		private navbarService: NavbarService
 	) { }
-
+	
 	ngOnInit() {
+		this.navbarService.show();
 		this.sub = this.route.queryParams.subscribe(params => {
 			let CompanyId;
 			if (params.CompanyId) {
 				CompanyId = params.CompanyId;
 			}
+			
+			this.createForm();
+			
 			this.getCompanies(CompanyId);
-			this.getProducts()
+			this.getProducts();
 		});
 	}
-
+	
 	ngOnDestroy() {
 		this.sub.unsubscribe();
 	}
 	
-
-	handleCompany(event: any):void {
-		this.selectedCompany = event;
+	createForm(): any {
+		this.newOrderForm = this.fb.group({
+			selectedProduct: ['', Validators.required],
+			selectedCompany: ['', Validators.required],
+			amount: ['', Validators.required]
+		});
 	}
-	
-	handleProduct(event: any):void {
-		this.selectedProduct = event;
-	}
-	  
 
 	getCompanies(CompanyId) {
 		this.companyService.getCompanies().subscribe((companies) => {
 			this.listCompanies = companies;
 			if (CompanyId) {
-				this.selectedCompany = companies.find(company => company._id === CompanyId);
+				this.newOrderForm.patchValue({
+					selectedCompany: companies.find(company => company._id === CompanyId)
+				});
 			}
 		});
 	};
@@ -71,26 +81,47 @@ export class NewOrderComponent implements OnInit {
 		});
 	}
 
-	addItem() {	
-		this.listItems.push({
-			"_itemId": this.selectedProduct._id,
-			"name": this.selectedProduct.name,
-			'amount': this.amount
-		});
+	addItem(formValue) {
+		if (this.newOrderForm.valid) {
+			this.listItems.push({
+				"_itemId": formValue.selectedProduct._id,
+				'amount': formValue.amount
+			});
 
-		this.clear();
+			this.newOrderForm.patchValue({
+				selectedProduct: '',
+				amount: undefined
+			})
+		}
 	}
 
-	clear() {
-		this.amount = undefined;
-		this.selectedCompany = undefined;
-		this.selectedProduct = undefined;
+	removeItem(index) {
+		this.listItems.splice(index, 1);
 	}
 	
-	onSubmit() {
-		this.companyService.postCompanyOrder(this.selectedCompany._id, this.listItems)
+	getPropProduct(model, prop) {
+		return this.listProducts.find(product => product._id === model._itemId)[prop];
+	}
+	
+	
+	onSubmit(formValue) {
+		const items = this.listItems.map(item => ({
+			_itemId: item._itemId,
+			amount: item.amount
+		}));
+		const { _id: CompanyId } = this.newOrderForm.value.selectedCompany;
+
+		this.companyService.postCompanyOrder(this.newOrderForm.value.selectedCompany._id, items)
 			.subscribe((order) => {
-				console.log(order);
+				this.listItems = [];
+				this.messageService.success("Pedido feito com successo!");
+				setTimeout(() => {
+					this.router.navigate(['/order/list'], {
+						queryParams: { CompanyId }
+					});
+				}, 500);
+			}, () => {
+				this.messageService.error("Erro ao realizar pedido");
 			});
 	}
 }

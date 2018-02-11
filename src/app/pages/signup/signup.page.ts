@@ -7,6 +7,7 @@ import { User } from '../../shared/models/user.model';
 import { AuthService } from '../../shared/services/auth/auth.service';
 import { Subscription } from 'rxjs/Subscription';
 import { UserService } from '../../shared/services/user/user.service';
+import { TokenKey } from '../../shared/services/Config';
 
 @Component({
 	selector: 'app-signup',
@@ -35,9 +36,12 @@ export class SignupComponent implements OnInit {
 	ngOnInit() {
 		this.navService.hide();
 		this.sub = this.route.data.subscribe(params => {
-			console.log(params)
 			if (params.action) {
 				this.action = params.action;
+			}
+			if(localStorage.getItem(TokenKey)) {
+				this.navService.show();
+				this.action = 'update';
 			}
 
 			this.createFormGroup();
@@ -70,9 +74,9 @@ export class SignupComponent implements OnInit {
 		if (this.signupForm.valid) {
 			let user = { email, name, password };
 			if (this.action === "update") {
-				this.userService.updateUser(user).subscribe(this.onSubmitSuccess);
+				this.userService.updateUser(user).subscribe(this.onSubmitSuccess.bind(this));
 			} else {
-				this.authService.signup(user).subscribe(this.onSubmitSuccess);
+				this.authService.signup(user).subscribe(this.onSubmitSuccess.bind(this));
 			}
 		} else {
 			Object.keys(this.signupForm.controls).forEach(field => {
@@ -83,11 +87,9 @@ export class SignupComponent implements OnInit {
 	}
 
 	onSubmitSuccess(respose) {
-		if (this.action === "create") {
-			this.router.navigate(["/dashboard"]).then(() => {
-				this.navService.show();
-			});
-		}
+		this.router.navigate(["/dashboard"]).then(() => {
+			this.navService.show();
+		});
 	}
 	
 }

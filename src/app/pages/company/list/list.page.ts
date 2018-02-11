@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CompanyService } from '../../../shared/services/company/company.service';
+import { NavbarService } from '../../../shared/components/navbar/navbar.service';
 
 @Component({
 	selector: 'list-companies',
@@ -10,9 +11,12 @@ export class ListCompaniesComponent implements OnInit {
 	
 	listCompanies = [];
 
-	constructor(private companyService: CompanyService) { }
+	constructor(
+		private companyService: CompanyService,
+		private navbarService: NavbarService) { }
 	
 	ngOnInit() {
+		this.navbarService.show();
 		this.getCompanies();
 	}
 	

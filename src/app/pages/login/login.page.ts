@@ -5,6 +5,7 @@ import { NavbarService } from '../../shared/components/navbar/navbar.service';
 import { User } from '../../shared/models/user.model';
 import { AuthService } from '../../shared/services/auth/auth.service';
 import { Router } from '@angular/router';
+import { TokenKey } from '../../shared/services/Config';
 
 @Component({
 	selector: 'login',
@@ -28,6 +29,10 @@ export class LoginComponent implements OnInit {
 	}
 		
 	ngOnInit() {
+
+		if(localStorage.getItem(TokenKey)) {
+			this.router.navigate(["/dashboard"]);
+		}
 		this.navService.hide();
 		
 		this.loginForm = this.fb.group({

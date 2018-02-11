@@ -7,6 +7,8 @@ import { SignupComponent } from './signup.page';
 import { AuthService } from '../../shared/services/auth/auth.service';
 import { UserService } from '../../shared/services/user/user.service';
 
+import { ElModule } from 'element-angular';
+
 @NgModule({
 	declarations: [
 		SignupComponent
@@ -17,7 +19,9 @@ import { UserService } from '../../shared/services/user/user.service';
 	imports: [
 		RouterModule,
 		ReactiveFormsModule, FormsModule,
-		CommonModule
+		CommonModule,
+
+		ElModule
 	],
 	providers: [
 		AuthService, UserService

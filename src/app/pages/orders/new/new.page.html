@@ -1,42 +1,42 @@
 <section>
-	<el-form [inline]="true" size="small">
+
+	<el-form [inline]="true" size="small" [formGroup]="newOrderForm">
 		
 		<div el-row>
-			<el-form-item>
-				<el-select [model]="selectedCompany" placeholder="Seleciona uma empresa" (modelChange)="handleCompany($event)">
-					<el-option *ngFor="let company of listCompanies" [label]="company.socialName" [value]="company">
-					</el-option>
+			<el-form-item el-col span="4">
+				<el-select formControlName="selectedCompany" placeholder="Seleciona uma empresa">
+					<el-option *ngFor="let company of listCompanies" [label]="company.socialName" [value]="company"></el-option>
 				</el-select>
 			</el-form-item>
 		</div>
 		
 		<div el-row>
-			<el-form-item el-col span="6">
-				<el-select [model]="selectedProduct" placeholder="Selecione um produto" (modelChange)="handleProduct($event)">
-					<el-option *ngFor="let product of listProducts" [label]="product.name" [value]="product">
-					</el-option>
+			<el-form-item el-col span="4">
+				<el-select formControlName="selectedProduct" [clearable]="true" placeholder="Selecione um produto">
+					<el-option *ngFor="let product of listProducts" [label]="product.name" [value]="product"></el-option>
 				</el-select>
 			</el-form-item>
 			
 			<!-- todo: com erro, ver depois -->
-			<el-form-item el-col span="12" label="Quantidade" [required]="true">
-				{{amount}}
-				<el-input [model]="amount"></el-input>
+			<el-form-item el-col span="6" label="Quantidade"> 
+				<el-input formControlName="amount"></el-input>
 			</el-form-item>
 			
 			<el-form-item el-col span="2">
-				<el-button type="primary"(click)="addItem()">Adicionar</el-button>
+				<el-button type="primary"(click)="addItem(newOrderForm.value)">Adicionar</el-button>
 			</el-form-item>
 		</div>
 	</el-form>
 	
 	<div *ngIf="listItems.length" id="list-orders">
 		<el-table  [model]="listItems" [stripe]="true">
-			<el-table-column model-key="name" label="Produto" width="140"></el-table-column>
+			<el-table-column model-key="name" label="Produto" width="140">
+				<ng-template #slot let-scope="scope">{{getPropProduct(listItems[scope.index], 'name')}}</ng-template>
+			</el-table-column>
 			<el-table-column model-key="amount" label="Quantidade" width="140"></el-table-column>
 			<el-table-column model-key="" label="Ação" width="140">
 				<ng-template #slot let-scope="scope">
-					X
+					<el-button type="text" (click)="removeItem(scope.index)">Remover item</el-button>
 				</ng-template>
 			</el-table-column>
 		</el-table>

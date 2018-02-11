@@ -1,62 +1,33 @@
 <section id="container-signup">
 	<div id="bg-signup"></div>
-	<div  id="card-signup" class="card">
-		<div class="card-header">
-			<h1 class="card-title">{{ isCreateMode() ? 'Create an account' : 'My account' }} </h1>
-			<div class="link-sign">
-				<i class="material-icons">person</i>
-				<a routerLink="/login" routerLinkActive="active">Login</a>                    
+	<el-card class="box-card" style="width: 400px"> 
+		<ng-template #header>
+			<div class="clearfix">
+				<span class="card-title" style="line-height: 36px;">{{ isCreateMode() ? 'Create an account' : 'My account' }} </span>
+				<el-button *ngIf="action !== 'update'" routerLink="/login" routerLinkActive="active" style="float: right;" type="primary">Login</el-button>
 			</div>
-		</div>
+		</ng-template>
 		<div class="card-body">
-			<form [formGroup]="signupForm" novalidate>
-				<div class="md-input-group">
-					<label for="login-user" class="md-label">E-mail</label>
-					<input id="login-user" class="md-input" type="text"  formControlName="email">
-					
-					<div class="alert alert-danger" *ngIf="signupForm.controls.email.invalid && (signupForm.controls.email.dirty || signupForm.controls.email.touched)">
-						<div *ngIf="signupForm.controls.email.errors && signupForm.controls.email.errors.required">
-							Login is required.
-						</div>
-					</div>
-				</div>
-
-				<div class="md-input-group">
-						<label for="name" class="md-label">Name</label>
-						<input id="name" class="md-input" type="text"  formControlName="name">
-						
-						<div class="alert alert-danger" *ngIf="signupForm.controls.name.invalid && (signupForm.controls.name.dirty || signupForm.controls.name.touched)">
-							<div *ngIf="signupForm.controls.name.errors && signupForm.controls.name.errors.required">
-								Name is required.
-							</div>
-						</div>
-					</div>
+			<el-form [formGroup]="signupForm" label-width="150px">
 				
-				<div class="md-input-group">
-					<label for="login-pass" class="md-label">Password</label>
-					<input id="login-pass" class="md-input" type="password"  formControlName="password">
-					
-					<div class="alert alert-danger" *ngIf="signupForm.controls.password.invalid && (signupForm.controls.password.dirty || signupForm.controls.password.touched)">
-						<div *ngIf="signupForm.controls.password.errors && signupForm.controls.password.errors.required">
-							password is required.
-						</div>
-					</div>
-				</div>
+				<el-form-item label="Name" [required]="true">
+					<el-input formControlName="name" native-type="text"></el-input>
+				</el-form-item>
 				
-				<div class="md-input-group">
-					<label for="login-re_pass" class="md-label">Re enter password</label>
-					<input id="login-re_pass" class="md-input" type="password"  formControlName="rePassword">
-					
-					<div class="alert alert-danger" *ngIf="signupForm.controls.rePassword.invalid && (signupForm.controls.rePassword.dirty || signupForm.controls.rePassword.touched)">
-						<div *ngIf="signupForm.controls.rePassword.errors && signupForm.controls.rePassword.errors.required">
-							rePassword is required.
-						</div>
-					</div>
-				</div>
-			</form>
+				<el-form-item label="E-mail" [required]="true">
+					<el-input formControlName="email" native-type="text"></el-input>
+				</el-form-item>
+				
+				<el-form-item label="Password" [required]="true">
+					<el-input formControlName="password" native-type="password"></el-input>
+				</el-form-item>
+				
+				<el-form-item label="Re-password" [required]="true">
+					<el-input formControlName="rePassword" native-type="password"></el-input>
+				</el-form-item>
+				
+				<el-button type="primary" (click)="onSubmit(signupForm.value)">{{ isCreateMode() ? 'Sign up' : 'Update account'}}</el-button>
+			</el-form>
 		</div>
-		<div class="card-footer">
-			<button full class="md-button" (click)="onSubmit(signupForm.value)">{{ isCreateMode() ? 'Sign up' : 'Update account'}}</button>
-		</div>
-	</div>
+	</el-card>
 </section>

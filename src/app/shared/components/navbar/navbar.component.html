@@ -1,15 +1,23 @@
 <el-menu *ngIf="navService.visible" class="nav-bar" mode="horizontal">
-	<el-menu-item index="1"><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></el-menu-item>
+	<el-menu-item index="1"><el-button type="text" routerLink="/dashboard" routerLinkActive="active">Dashboard</el-button></el-menu-item>
 	
 	<el-submenu index="2" class="submenu" title="Company">
-		<el-menu-item index="2-1"><a routerLink="/company/new" routerLinkActive="active">New company</a></el-menu-item>
-		<el-menu-item index="2-1"><a routerLink="/company/list" routerLinkActive="active">List companies</a></el-menu-item>
+		<el-menu-item index="2-1"><el-button type="text" routerLink="/company/new" routerLinkActive="active">New company</el-button></el-menu-item>
+		<el-menu-item index="2-2"><el-button type="text" routerLink="/company/list" routerLinkActive="active">List companies</el-button></el-menu-item>
 	</el-submenu>
 
-	<el-submenu index="2" title="Orders">
-		<el-menu-item index="2-1"><a routerLink="/order/new" routerLinkActive="active">New order</a></el-menu-item>
-		<!-- <el-menu-item index="2-1"><a routerLink="/order/list" routerLinkActive="active">List orders</a></el-menu-item> -->
+	<el-submenu index="3" title="Orders">
+		<el-menu-item index="3-1"><el-button type="text" routerLink="/order/new" routerLinkActive="active">New order</el-button></el-menu-item>
+		<!-- <el-menu-item index="3-2"><a routerLink="/order/list" routerLinkActive="active">List orders</a></el-menu-item> -->
 	</el-submenu>
 
-	<el-menu-item><a routerLink="/account" routerLinkActive="active">Account</a></el-menu-item>
+	<el-menu-item index="4" ><el-button type="text" routerLink="/account" routerLinkActive="active">Account</el-button></el-menu-item>
+	
+	
+	<div id="signout">
+		<el-menu-item id="signout" index="5"><el-button (click)="signOut()">Sair</el-button></el-menu-item>
+	</div>
+	<div *ngIf="user" style="float: right">
+		<el-menu-item>Olá {{user.name}}</el-menu-item>
+	</div>
 </el-menu>

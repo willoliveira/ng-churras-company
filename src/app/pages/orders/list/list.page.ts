@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { CompanyService } from '../../../shared/services/company/company.service';
 import { CompanyOrders } from '../../../shared/models/company-orders';
+import { NavbarService } from '../../../shared/components/navbar/navbar.service';
 
 @Component({
 	selector: 'list-orders',
@@ -25,16 +26,18 @@ export class ListOrdersComponent implements OnInit, OnDestroy {
 	constructor(
 		private route: ActivatedRoute, 
 		private router: Router,
-		private companyService: CompanyService
+		private companyService: CompanyService,
+		private navbarService: NavbarService
 	) { }
 
 	ngOnInit() {
+		this.navbarService.show();
 		this.sub = this.route.queryParams.subscribe(params => {
 			let CompanyId;
 			if (params.CompanyId) {
 				CompanyId = params.CompanyId;
+				this.getOrders(CompanyId);
 			}
-			this.getOrders(CompanyId);
 		});
 	}
 
@@ -43,7 +46,6 @@ export class ListOrdersComponent implements OnInit, OnDestroy {
 	}
 
 	private getOrders(CompanyId: String) {
-		console.log(CompanyId);
 		this.companyService.getCompanyOrders(CompanyId)
 			.subscribe((order: any) => {
 				this.companyOrders = order;

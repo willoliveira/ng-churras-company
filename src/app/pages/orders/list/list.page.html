@@ -1,6 +1,9 @@
 <section>
 	
-	<h1>Meus Pedidos</h1>
+	<h1>
+		Meus Pedidos
+		<span *ngIf="!waitRequest"> - {{companyOrders.Company.socialName}}</span>
+	</h1>
 	<div *ngIf="!waitRequest && emptyOrders()">
 		Sem pedidos
 	</div>
@@ -8,16 +11,6 @@
 		<!-- TODO: fazer ainda! -->
 		<div class="fliter-table">
 			<h3>Filtre a lista de pedidos</h3>
-			<!-- <div class="md-input-group">
-				<label for="filter-cnpj" class="md-label">CNPJ</label>
-				<input id="filter-cnpj" class="md-input" type="text" placeholder="">
-			</div>
-			
-			<div class="md-input-group">
-				<label for="filter-order" class="md-label">Order</label>
-				<input id="filter-order" class="md-input" type="text" placeholder="">
-			</div> -->
-
 			<el-form [inline]="true" size="small">
 
 				<el-form-item label="CNPJ">
@@ -52,25 +45,5 @@
 			</el-table-column>
 		</el-table>
 
-		<!-- <table>
-			<thead>
-				<tr>
-					<th>Código do pedido</th>
-					<th>Itens do pedido</th>
-					<th>Ações</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr *ngFor="let companyOrder of companyOrders.Orders | filter: order">
-					<td>{{companyOrder._id}}</td>
-					<td>
-						<p *ngFor="let orderItem of companyOrder.Items">
-							{{orderItem.amount}}x {{orderItem.name}}
-						</p>
-					</td>
-					<td><button type="button" (click)="cancelOrder(companyOrder.id)">Cancelar</button></td>
-				</tr>
-			</tbody>
-		</table> -->
 	</div>
 </section>

@@ -1,5 +1,7 @@
 <section>
+	
 	<h1>Empresa disponiveis para realizar pedidos</h1>
+	
 	<div *ngIf="listCompanies.length">
 		<el-table [model]="listCompanies" [stripe]="true">
 			<el-table-column model-key="CNPJ" label="CNPJ" width="140"></el-table-column>
@@ -10,10 +12,11 @@
 			<el-table-column model-key="OrdersLength" label="OrdersLength">
 				<ng-template #slot let-scope="scope">
 					<el-button type="text">
-						<a model-key="_id" [routerLink]="['/order/list']" [queryParams]="{'CompanyId': listCompanies[scope.index]._id }">Fazer pedido</a>
+						<a model-key="_id" [routerLink]="['/order/new']" [queryParams]="{'CompanyId': listCompanies[scope.index]._id }">Fazer pedido</a>
 					</el-button>
 				</ng-template>
 			</el-table-column>
 		</el-table>
 	</div>
+
 </section>

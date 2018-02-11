@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
+import { ElModule, ElMessageService } from 'element-angular';
+import { TextMaskModule } from 'angular2-text-mask';
+
 import { NewCompanyComponent } from './new.page';
 
 @NgModule({
@@ -15,8 +18,10 @@ import { NewCompanyComponent } from './new.page';
 	imports: [
 		CommonModule,
 		ReactiveFormsModule, FormsModule,
-		RouterModule
+		RouterModule,
+		
+		ElModule, TextMaskModule
 	],
-	providers: []
+	providers: [ ElMessageService ]
 })
 export class NewCompanyPageModule { }

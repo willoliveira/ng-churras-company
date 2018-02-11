@@ -1,33 +1,20 @@
-<h1>DashBoard</h1>
+<section>
 
-<h2>Minhas Empresas</h2>
-
-<el-table [model]="companyOrders" [stripe]="true">
-	<el-table-column model-key="Company.CNPJ" label="CNPJ" width="140">
-		<ng-template #slot let-scope="scope">{{companyOrders[scope.index].Company.CNPJ}}</ng-template>
-	</el-table-column>
-	<el-table-column model-key="Company.nameFantasy" label="Nome fantasia" width="140">
-		<ng-template #slot let-scope="scope">{{companyOrders[scope.index].Company.nameFantasy}}</ng-template>
-	</el-table-column>
-	<el-table-column model-key="Company.OrdersLength" label="Quantidade">
-		<ng-template #slot let-scope="scope">
-			<a model-key="_id" [routerLink]="['/order/list']" [queryParams]="{'CompanyId': companyOrders[scope.index].Company._id }">{{companyOrders[scope.index].OrdersLength}}</a>
-		</ng-template>
-	</el-table-column>
-</el-table>
-<!-- <table>
-	<thead>
-		<tr>
-			<th>CNPJ</th>
-			<th>Nome Fantasia</th>
-			<th>Quantidade de pedidos</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr *ngFor="let companyOrder of companyOrders">
-			<td>{{companyOrder.Company.CNPJ}}</td>
-			<td>{{companyOrder.Company.nameFantasy}}</td>
-			<td><a [routerLink]="['/order/list']" [queryParams]="{'CompanyId': companyOrder.Company._id }">{{companyOrder.OrdersLength}}</a></td>
-		</tr>
-	</tbody>
-</table> -->
+	<h1>DashBoard</h1>
+	
+	<h2>Minhas Empresas</h2>
+	
+	<el-table [model]="companyOrders" [stripe]="true">
+		<el-table-column model-key="Company.CNPJ" label="CNPJ" width="140">
+			<ng-template #slot let-scope="scope">{{companyOrders[scope.index].Company.CNPJ}}</ng-template>
+		</el-table-column>
+		<el-table-column model-key="Company.nameFantasy" label="Nome fantasia" width="140">
+			<ng-template #slot let-scope="scope">{{companyOrders[scope.index].Company.nameFantasy}}</ng-template>
+		</el-table-column>
+		<el-table-column model-key="Company.OrdersLength" label="Quantidade">
+			<ng-template #slot let-scope="scope">
+				<a model-key="_id" [routerLink]="['/order/list']" [queryParams]="{'CompanyId': companyOrders[scope.index].Company._id }">{{companyOrders[scope.index].OrdersLength}}</a>
+			</ng-template>
+		</el-table-column>
+	</el-table>
+</section>
