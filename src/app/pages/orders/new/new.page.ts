@@ -22,7 +22,7 @@ export class NewOrderComponent implements OnInit {
 	listItems = [];
 
 	selectedCompany: Company;
-	selectedItem;
+	selectedProduct;
 	amount;
 
 	constructor(
@@ -46,6 +46,16 @@ export class NewOrderComponent implements OnInit {
 		this.sub.unsubscribe();
 	}
 	
+
+	handleCompany(event: any):void {
+		this.selectedCompany = event;
+	}
+	
+	handleProduct(event: any):void {
+		this.selectedProduct = event;
+	}
+	  
+
 	getCompanies(CompanyId) {
 		this.companyService.getCompanies().subscribe((companies) => {
 			this.listCompanies = companies;
@@ -63,10 +73,18 @@ export class NewOrderComponent implements OnInit {
 
 	addItem() {	
 		this.listItems.push({
-			"_itemId": this.selectedItem._id,
-			"name": this.selectedItem.name,
+			"_itemId": this.selectedProduct._id,
+			"name": this.selectedProduct.name,
 			'amount': this.amount
-		});;
+		});
+
+		this.clear();
+	}
+
+	clear() {
+		this.amount = undefined;
+		this.selectedCompany = undefined;
+		this.selectedProduct = undefined;
 	}
 	
 	onSubmit() {

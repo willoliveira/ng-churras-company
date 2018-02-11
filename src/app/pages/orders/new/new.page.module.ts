@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ItemService } from '../../../shared/services/item/item.service';
 
+import { ElModule } from 'element-angular';
+
 @NgModule({
 	declarations: [
 		NewOrderComponent
@@ -12,7 +14,7 @@ import { ItemService } from '../../../shared/services/item/item.service';
 		NewOrderComponent
 	],
 	imports: [
-		CommonModule, FormsModule
+		CommonModule, FormsModule, ElModule
 	],
 	providers: [ItemService]
 })

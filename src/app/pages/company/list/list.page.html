@@ -1,26 +1,19 @@
 <section>
 	<h1>Empresa disponiveis para realizar pedidos</h1>
 	<div *ngIf="listCompanies.length">
-		<table>
-			<thead>
-				<tr>
-					<td>CNPJ</td>
-					<td>socialName</td>
-					<td>nameFantasy</td>
-					<td>about</td>
-					<td>createDate</td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr *ngFor="let company of listCompanies">
-					<td>{{company.CNPJ}}</td>
-					<td>{{company.socialName}}</td>
-					<td>{{company.nameFantasy}}</td>
-					<td>{{company.about}}</td>
-					<td>{{company.createDate | date}}</td>
-					<td><a [routerLink]="['/order/new']" [queryParams]="{'CompanyId': company._id }">Fazer pedido</a></td>
-				</tr>
-			</tbody>	
-		</table>
+		<el-table [model]="listCompanies" [stripe]="true">
+			<el-table-column model-key="CNPJ" label="CNPJ" width="140"></el-table-column>
+			<el-table-column model-key="socialName" label="socialName" width="140"></el-table-column>
+			<el-table-column model-key="nameFantasy" label="nameFantasy" width="140"></el-table-column>
+			<el-table-column model-key="about" label="about" width="140"></el-table-column>
+			<el-table-column model-key="createDate" label="createDate" width="140"></el-table-column>
+			<el-table-column model-key="OrdersLength" label="OrdersLength">
+				<ng-template #slot let-scope="scope">
+					<el-button type="text">
+						<a model-key="_id" [routerLink]="['/order/list']" [queryParams]="{'CompanyId': listCompanies[scope.index]._id }">Fazer pedido</a>
+					</el-button>
+				</ng-template>
+			</el-table-column>
+		</el-table>
 	</div>
 </section>

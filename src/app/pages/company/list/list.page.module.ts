@@ -4,6 +4,8 @@ import { CompanyService } from '../../../shared/services/company/company.service
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
+import { ElModule } from 'element-angular'
+
 @NgModule({
 	declarations: [
 		ListCompaniesComponent
@@ -12,7 +14,7 @@ import { RouterModule } from '@angular/router';
 		ListCompaniesComponent
 	],
 	imports: [
-		CommonModule, RouterModule
+		CommonModule, RouterModule, ElModule
 	],
 	providers: [
 		CompanyService
