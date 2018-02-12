@@ -47,7 +47,7 @@ export class ListOrdersComponent implements OnInit, OnDestroy {
 		this.sub.unsubscribe();
 	}
 
-	private getOrders(CompanyId: String) {
+	getOrders(CompanyId: String) {
 		this.companyService.getCompanyOrders(CompanyId)
 			.subscribe((order: any) => {
 				this.companyOrders = order;
@@ -55,7 +55,7 @@ export class ListOrdersComponent implements OnInit, OnDestroy {
 			});
 	}
 
-	private cancelOrder(OrderId: String) {
+	cancelOrder(OrderId: String) {
 		this.companyService.cancelCompanyOrder(OrderId)
 			.subscribe((orderId) => {
 				let orderIndex = this.companyOrders.Orders.map(order => order.id).indexOf(OrderId);
@@ -66,7 +66,7 @@ export class ListOrdersComponent implements OnInit, OnDestroy {
 			})
 	}
 
-	private emptyOrders(): boolean {
+	emptyOrders(): boolean {
 		return this.companyOrders ? this.companyOrders.Orders.length === 0 : true;
 	}
 }
