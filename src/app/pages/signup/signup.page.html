@@ -10,23 +10,37 @@
 		<div class="card-body">
 			<el-form [formGroup]="signupForm" label-width="150px">
 				
-				<el-form-item label="Name" [required]="true">
+				<el-form-item label="Name" 
+					[required]="true"
+					[status]="statusCtrl('name')" 
+					[error]="messageCtrl('name')">
 					<el-input formControlName="name" native-type="text"></el-input>
 				</el-form-item>
 				
-				<el-form-item label="E-mail" [required]="true">
+				<el-form-item label="E-mail" 
+					[required]="true"
+					[status]="statusCtrl('email')" 
+					[error]="messageCtrl('email')">
 					<el-input formControlName="email" native-type="text"></el-input>
 				</el-form-item>
 				
-				<el-form-item label="Password" [required]="true">
+				<el-form-item label="Password"
+					[required]="true"
+					[status]="statusCtrl('password')"
+					[error]="messageCtrl('password')">
 					<el-input formControlName="password" native-type="password"></el-input>
 				</el-form-item>
 				
-				<el-form-item label="Re-password" [required]="true">
+				<el-form-item label="Re-password"
+					[required]="true"
+					[status]="statusCtrl('rePassword')" 
+					[error]="messageCtrl('rePassword')">
 					<el-input formControlName="rePassword" native-type="password"></el-input>
 				</el-form-item>
 				
-				<el-button type="primary" (click)="onSubmit(signupForm.value)">{{ isCreateMode() ? 'Sign up' : 'Update account'}}</el-button>
+				<el-button type="primary" 
+					(click)="onSubmit(signupForm.value)"
+					[elDisabled]="waitRequest">{{ isCreateMode() ? 'Sign up' : 'Update account'}}</el-button>
 			</el-form>
 		</div>
 	</el-card>
