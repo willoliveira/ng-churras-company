@@ -1,4 +1,4 @@
-export const api_url: String = "http://localhost:3000/api";
+export const api_url: String = "https://churras-node-api.herokuapp.com/api";
 
 export const TokenKey: string = "token";
 
