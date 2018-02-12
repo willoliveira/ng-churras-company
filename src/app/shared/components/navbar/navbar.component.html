@@ -18,6 +18,6 @@
 		<el-menu-item id="signout" index="5"><el-button (click)="signOut()">Sair</el-button></el-menu-item>
 	</div>
 	<div *ngIf="user" style="float: right">
-		<el-menu-item>Olá {{user.name}}</el-menu-item>
+		<el-menu-item><a routerLink="/account" routerLinkActive="active">Olá {{user.name}}</a></el-menu-item>
 	</div>
 </el-menu>

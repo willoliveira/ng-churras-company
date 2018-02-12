@@ -16,7 +16,7 @@ import { NavbarService } from '../../../shared/components/navbar/navbar.service'
 })
 export class NewOrderComponent implements OnInit {
 
-	@ViewChild('selectProduct') selectProduct: any;
+	@ViewChild('selectProduct') selectProduct;
 
 	newOrderForm: FormGroup;
 
@@ -62,7 +62,7 @@ export class NewOrderComponent implements OnInit {
 		this.newOrderForm = this.fb.group({
 			selectedProduct: ['', Validators.required],
 			selectedCompany: ['', Validators.required],
-			amount: ['', Validators.required]
+			amount: [1, Validators.required]
 		});
 	}
 
@@ -84,7 +84,6 @@ export class NewOrderComponent implements OnInit {
 	}
 
 	addItem(formValue) {
-		console.log(this.selectProduct);
 		if (this.newOrderForm.valid) {
 			this.listItems.push({
 				"_itemId": formValue.selectedProduct._id,
@@ -93,7 +92,7 @@ export class NewOrderComponent implements OnInit {
 			
 			this.newOrderForm.patchValue({
 				selectedProduct: null,
-				amount: undefined
+				amount: 1
 			})
 			this.selectProduct.selectedLabel = "";
 			this.selectProduct.model = null;
