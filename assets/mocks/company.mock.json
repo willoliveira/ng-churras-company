@@ -1,0 +1,25 @@
+{
+    "content": [
+        {
+            "Id": "1",
+            "FantasyName": "Empresa top",
+            "CNPJ": "11111111"
+        }, {
+            "Id": "2",
+            "FantasyName": "Empresa top 1",
+            "CNPJ": "222222222"
+        }, {
+            "Id": "3",
+            "FantasyName": "Empresa top 2",
+            "CNPJ": "333333"
+        }, {
+            "Id": "4",
+            "FantasyName": "Empresa top 3",
+            "CNPJ": "4444444444"        
+        }, {
+            "Id": "5",
+            "FantasyName": "Empresa top 4",
+            "CNPJ": "5555555555"
+        }
+    ]
+}
