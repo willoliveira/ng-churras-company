@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CompanyService } from '../../../shared/services/company/company.service';
 import { ItemService } from '../../../shared/services/item/item.service';
 import { Company } from '../../../shared/models/company.model';
@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { ElMessageService } from 'element-angular'
+import { ElMessageService, ElChildModules } from 'element-angular'
 import { NavbarService } from '../../../shared/components/navbar/navbar.service';
 
 @Component({
@@ -15,6 +15,8 @@ import { NavbarService } from '../../../shared/components/navbar/navbar.service'
 	styleUrls: ['./new.page.scss']
 })
 export class NewOrderComponent implements OnInit {
+
+	@ViewChild('selectProduct') selectProduct: any;
 
 	newOrderForm: FormGroup;
 
@@ -82,16 +84,19 @@ export class NewOrderComponent implements OnInit {
 	}
 
 	addItem(formValue) {
+		console.log(this.selectProduct);
 		if (this.newOrderForm.valid) {
 			this.listItems.push({
 				"_itemId": formValue.selectedProduct._id,
 				'amount': formValue.amount
 			});
-
+			
 			this.newOrderForm.patchValue({
-				selectedProduct: '',
+				selectedProduct: null,
 				amount: undefined
 			})
+			this.selectProduct.selectedLabel = "";
+			this.selectProduct.model = null;
 		}
 	}
 
@@ -115,11 +120,10 @@ export class NewOrderComponent implements OnInit {
 			.subscribe((order) => {
 				this.listItems = [];
 				this.messageService.success("Pedido feito com successo!");
-				setTimeout(() => {
-					this.router.navigate(['/order/list'], {
-						queryParams: { CompanyId }
-					});
-				}, 500);
+				
+				this.router.navigate(['/order/list'], {
+					queryParams: { CompanyId }
+				});
 			}, () => {
 				this.messageService.error("Erro ao realizar pedido");
 			});

@@ -46,13 +46,21 @@ export class CompanyService {
 			);
 	}
 
-	cancelCompanyOrder(OrderId): Observable<String> {
-		return Observable.of(OrderId);
+	cancelCompanyOrder(OrderId) {
+		return this.http.delete(`${api_url}/v1/order/${OrderId}`, {})
 	}
 
 	getCompanies(): Observable<Array<Company>> {
 		return this.http
 			.get<Array<Company>>(`${api_url}/v1/company`)
+			.pipe(
+				map(response => response["content"])
+			);
+	}
+
+	getCompany(companyId): Observable<Array<Company>> {
+		return this.http
+			.get<Array<Company>>(`${api_url}/v1/company/${companyId}`)
 			.pipe(
 				map(response => response["content"])
 			);
@@ -66,9 +74,9 @@ export class CompanyService {
 			);
 	}
 
-	editCompany(company: Company): Observable<Company>  {
+	updateCompany(CompanyId, company: Company): Observable<Company>  {
 		return this.http
-			.put<Company>(`${api_url}/v1/company/${company._id}`, company)
+			.put<Company>(`${api_url}/v1/company/${CompanyId}`, company)
 			.pipe(
 				map(response => response["content"])
 			);

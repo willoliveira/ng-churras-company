@@ -3,16 +3,30 @@ import { HttpClient } from '@angular/common/http';
 import { User } from '../../models/user.model';
 
 import { Observable } from 'rxjs/Observable'
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 import 'rxjs/add/observable/of';
 import { api_url, TokenKey } from '../Config';
+import { Router } from '@angular/router';
 
 
 @Injectable()
 export class AuthService {
 	
-	constructor(private http: HttpClient) { }
+	constructor(
+		private http: HttpClient,
+		private router: Router
+	) { }
 	
+	validate() {
+		return this.http
+			.post(`${api_url}/v1/auth/validate`, { 
+				token: localStorage.getItem(TokenKey) 
+			})
+			.pipe(
+				map((response) => response["content"].valid)
+			)
+		;
+	}
 	
 	signin(user: User): Observable<any> {
 		return this.http

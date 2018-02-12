@@ -2,18 +2,18 @@
 	
 	<h1>Empresa disponiveis para realizar pedidos</h1>
 	
-	<div *ngIf="listCompanies.length">
+	<div *ngIf="listCompanies.length" style="max-width: 1100px">
 		<el-table [model]="listCompanies" [stripe]="true">
 			<el-table-column model-key="CNPJ" label="CNPJ" width="140"></el-table-column>
 			<el-table-column model-key="socialName" label="socialName" width="140"></el-table-column>
 			<el-table-column model-key="nameFantasy" label="nameFantasy" width="140"></el-table-column>
 			<el-table-column model-key="about" label="about" width="140"></el-table-column>
 			<el-table-column model-key="createDate" label="createDate" width="140"></el-table-column>
-			<el-table-column model-key="OrdersLength" label="OrdersLength">
+			<el-table-column model-key="" label="Ações">
 				<ng-template #slot let-scope="scope">
-					<el-button type="text">
-						<a model-key="_id" [routerLink]="['/order/new']" [queryParams]="{'CompanyId': listCompanies[scope.index]._id }">Fazer pedido</a>
-					</el-button>
+					<el-button [routerLink]="['/order/new']" [queryParams]="{'CompanyId': listCompanies[scope.index]._id }">Fazer pedido</el-button>
+					<el-button [routerLink]="['/order/list']" [queryParams]="{'CompanyId': listCompanies[scope.index]._id }">ver pedidos</el-button>
+					<el-button [routerLink]="['/company/new']" [queryParams]="{'CompanyId': listCompanies[scope.index]._id }">Editar</el-button>
 				</ng-template>
 			</el-table-column>
 		</el-table>

@@ -8,6 +8,7 @@ import { AuthService } from '../../shared/services/auth/auth.service';
 import { Subscription } from 'rxjs/Subscription';
 import { UserService } from '../../shared/services/user/user.service';
 import { TokenKey } from '../../shared/services/Config';
+import { ElMessageService } from 'element-angular';
 
 @Component({
 	selector: 'app-signup',
@@ -30,7 +31,9 @@ export class SignupComponent implements OnInit {
 		private authService: AuthService,
 		private userService: UserService,
 		private router: Router,
-		private fb: FormBuilder) {
+		private fb: FormBuilder,
+		private messageService: ElMessageService
+	) {
 	}
 	
 	ngOnInit() {
@@ -42,9 +45,13 @@ export class SignupComponent implements OnInit {
 			if(localStorage.getItem(TokenKey)) {
 				this.navService.show();
 				this.action = 'update';
+				this.userService.getUser().subscribe((data) => {
+					this.createFormGroup(data);
+				});
+			} else {
+				this.createFormGroup();
 			}
 
-			this.createFormGroup();
 		});
 	}
 
@@ -56,10 +63,10 @@ export class SignupComponent implements OnInit {
 		return this.action === "create";
 	}
 	
-	createFormGroup() {
+	createFormGroup(data?) {
 		this.signupForm = this.fb.group({
-			email: ['', Validators.required],
-			name: ['', Validators.required],
+			email: [data.email || '', Validators.required],
+			name: [data.name || '', Validators.required],
 			password: ['', Validators.required],
 			rePassword: ['', Validators.required]
 		});
@@ -74,9 +81,9 @@ export class SignupComponent implements OnInit {
 		if (this.signupForm.valid) {
 			let user = { email, name, password };
 			if (this.action === "update") {
-				this.userService.updateUser(user).subscribe(this.onSubmitSuccess.bind(this));
+				this.userService.updateUser(user).subscribe(this.onSubmitSuccess.bind(this), this.onError.bind(this));
 			} else {
-				this.authService.signup(user).subscribe(this.onSubmitSuccess.bind(this));
+				this.authService.signup(user).subscribe(this.onSubmitSuccess.bind(this), this.onError.bind(this));
 			}
 		} else {
 			Object.keys(this.signupForm.controls).forEach(field => {
@@ -86,10 +93,17 @@ export class SignupComponent implements OnInit {
 		}
 	}
 
+	
 	onSubmitSuccess(respose) {
+		let msg = this.action === 'update' ? "Usuário atualizado com sucesso" : "Usuário cadastrado com sucesso"
+		this.messageService.success(msg);
 		this.router.navigate(["/dashboard"]).then(() => {
 			this.navService.show();
 		});
 	}
 	
+	onError() {
+		let msg = this.action === 'update' ? "Erro ao atualizar usuário" : "Erro ao cadastrar usuário";
+		this.messageService.error(msg);
+	}
 }

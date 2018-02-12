@@ -9,7 +9,7 @@
 	</div>
 	<div *ngIf="!waitRequest && !emptyOrders()">
 		<!-- TODO: fazer ainda! -->
-		<div class="fliter-table">
+		<!-- <div class="fliter-table">
 			<h3>Filtre a lista de pedidos</h3>
 			<el-form [inline]="true" size="small">
 
@@ -26,7 +26,7 @@
 				</el-form-item>
 				
 			</el-form>
-		</div>
+		</div> -->
 		
 		<el-table [model]="companyOrders.Orders" [stripe]="true">
 
@@ -40,7 +40,7 @@
 			</el-table-column>
 			<el-table-column model-key="" label="Itens do pedido" width="140">
 				<ng-template #slot let-scope="scope">
-					<el-button type="primary" (click)="cancelOrder(companyOrders.Orders[scope.index].id)">Cancelar</el-button>
+					<el-button type="primary" (click)="cancelOrder(companyOrders.Orders[scope.index]._id)">Cancelar</el-button>
 				</ng-template>
 			</el-table-column>
 		</el-table>

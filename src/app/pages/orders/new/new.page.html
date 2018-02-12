@@ -12,14 +12,13 @@
 		
 		<div el-row>
 			<el-form-item el-col span="4">
-				<el-select formControlName="selectedProduct" [clearable]="true" placeholder="Selecione um produto">
+				<el-select #selectProduct formControlName="selectedProduct" [clearable]="true" placeholder="Selecione um produto">
 					<el-option *ngFor="let product of listProducts" [label]="product.name" [value]="product"></el-option>
 				</el-select>
 			</el-form-item>
 			
-			<!-- todo: com erro, ver depois -->
-			<el-form-item el-col span="6" label="Quantidade"> 
-				<el-input formControlName="amount"></el-input>
+			<el-form-item el-col span="8" label="Quantidade"> 
+				<el-input-number [step]="1" formControlName="amount"></el-input-number>
 			</el-form-item>
 			
 			<el-form-item el-col span="2">

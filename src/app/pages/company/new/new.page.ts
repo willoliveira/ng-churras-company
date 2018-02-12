@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { CompanyService } from '../../../shared/services/company/company.service';
 import { Company } from '../../../shared/models/company.model';
@@ -8,6 +8,7 @@ import { NavbarService } from '../../../shared/components/navbar/navbar.service'
 import { conformToMask } from 'angular2-text-mask';
 import { validateCNPJ } from '../../../shared/services/cnpj.validator';
 import { ElMessageService } from 'element-angular';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
 	selector: 'app-new',
@@ -15,10 +16,17 @@ import { ElMessageService } from 'element-angular';
 	styleUrls: ['./new.page.scss']
 })
 export class NewCompanyComponent implements OnInit {
-	public mask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
-	
+
+	sub: Subscription;
+	waitRequest = true;
+	CompanyId;
+	inEdit = false;
+	companyForm: FormGroup;
+	maskCNPJ = [/\d/,/\d/,'.',/\d/,/\d/,/\d/,'.',/\d/,/\d/,/\d/,'/', /\d/,/\d/,/\d/,/\d/,'-', /\d/,/\d/];
+
 	constructor(
 		private companyService: CompanyService,
+		private route: ActivatedRoute,
 		private router: Router,
 		private fb: FormBuilder,
 		private navbarService: NavbarService,
@@ -26,16 +34,32 @@ export class NewCompanyComponent implements OnInit {
 	) {
 	} 
 	
-	companyForm: FormGroup;
-	maskCNPJ = [/\d/,/\d/,'.',/\d/,/\d/,/\d/,'.',/\d/,/\d/,/\d/,'/', /\d/,/\d/,/\d/,/\d/,'-', /\d/,/\d/];
 	
 	ngOnInit() {
 		this.navbarService.show();
+		this.sub = this.route.queryParams.subscribe(params => {
+			const { CompanyId } = params;
+			if (CompanyId) {
+				this.companyService.getCompany(CompanyId)
+				.subscribe(data => {
+						this.inEdit = true;
+						this.CompanyId = CompanyId
+						this.createForm(data);
+						this.waitRequest = false;
+					})
+			} else {
+				this.waitRequest = false;
+				this.createForm({});
+			}
+		});
+	}
+
+	createForm(data?) {
 		this.companyForm = this.fb.group({
-			nameFantasy: ['', Validators.compose([Validators.required, this.RequiredValidator])],
-			socialName: ['', Validators.compose([Validators.required, this.RequiredValidator])],
-			about: ['', Validators.compose([Validators.required, this.RequiredValidator])],
-			CNPJ: ['', Validators.compose([Validators.required, this.RequiredValidator, this.CNPJValidator])]
+			nameFantasy: [data.nameFantasy || '', Validators.compose([Validators.required, this.RequiredValidator])],
+			socialName: [data.socialName || '', Validators.compose([Validators.required, this.RequiredValidator])],
+			about: [data.about || '', Validators.compose([Validators.required, this.RequiredValidator])],
+			CNPJ: [data.CNPJ || '', Validators.compose([Validators.required, this.RequiredValidator, this.CNPJValidator])]
 		});
 	}
 	
@@ -74,15 +98,23 @@ export class NewCompanyComponent implements OnInit {
 			'CNPJ': maskFormated
 		})
 	}
+
+	onSuccess(respose) {
+		let msg = this.inEdit ? "Empresa atualizada com successo!" : "Empresa cadastrada com successo!";
+		this.messageService.success(msg);
+		setTimeout(() => {
+			this.router.navigate(["/dashboard"]);
+		}, 500);
+	}
 	
 	onCreate(company: Company) {
 		if (this.companyForm.valid) {
-			this.companyService.createCompany(company).subscribe(respose => {
-				this.messageService.success("Empresa cadastrada com successo!");
-				setTimeout(() => {
-					this.router.navigate(["/dashboard"]);
-				}, 500);
-			});
+			
+			if (this.inEdit) {
+				this.companyService.updateCompany(this.CompanyId, company).subscribe(this.onSuccess.bind(this));
+			} else {
+				this.companyService.createCompany(company).subscribe(this.onSuccess.bind(this));
+			}
 		} else {
 			Object.keys(this.companyForm.controls).forEach(field => {
 				const control = this.companyForm.get(field);

@@ -34,16 +34,18 @@ import { FilterPipe } from './shared/pipes/filter.pipe';
 import { InjectTokenProvider } from './shared/services/auth/auth.interceptor';
 
 import 'element-angular/theme/index.css';
+import { AuthGuard } from './shared/services/auth/auth.guard';
+import { AuthService } from './shared/services/auth/auth.service';
 
 export const appRoutes: Routes = [
 	{ path: 'login', component: LoginComponent, data: { action: 'signin' } },
 	{ path: 'signup', component: SignupComponent, data: { action: 'create' } },
-	{ path: 'dashboard', component: DashboardComponent },
-	{ path: 'company/new', component: NewCompanyComponent },
-	{ path: 'company/list', component: ListCompaniesComponent },
-	{ path: 'order/new', component: NewOrderComponent },
-	{ path: 'order/list', component: ListOrdersComponent },
-	{ path: 'account', component: SignupComponent, data: { action: 'update' }  },
+	{ path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+	{ path: 'company/new', component: NewCompanyComponent, canActivate: [AuthGuard] },
+	{ path: 'company/list', component: ListCompaniesComponent, canActivate: [AuthGuard] },
+	{ path: 'order/new', component: NewOrderComponent, canActivate: [AuthGuard] },
+	{ path: 'order/list', component: ListOrdersComponent, canActivate: [AuthGuard] },
+	{ path: 'account', component: SignupComponent, canActivate: [AuthGuard], data: { action: 'update' }  },
 	{ path: '', redirectTo: '/login', pathMatch: 'full' }
 ]
 
@@ -70,7 +72,7 @@ export const appRoutes: Routes = [
 		ListOrdersPageModule, NewOrderPageModule
 	],
 	providers: [
-		NavbarService, InjectTokenProvider
+		NavbarService, InjectTokenProvider, AuthGuard, AuthService
 	],
 	bootstrap: [AppComponent]
 })

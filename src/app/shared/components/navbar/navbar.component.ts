@@ -23,9 +23,7 @@ export class NavbarComponent implements OnInit {
 	}
 
 	signOut() {
-		this.authService.signout().subscribe(() => {
-			console.log(localStorage.getItem("token"))
-			this.router.navigate(['/login']);
-		});
+		this.authService.signout()
+		this.router.navigate(['/login']);
 	}
 }

@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { CompanyService } from '../../../shared/services/company/company.service';
 import { CompanyOrders } from '../../../shared/models/company-orders';
 import { NavbarService } from '../../../shared/components/navbar/navbar.service';
+import { ElMessageService } from 'element-angular';
 
 @Component({
 	selector: 'list-orders',
@@ -27,7 +28,8 @@ export class ListOrdersComponent implements OnInit, OnDestroy {
 		private route: ActivatedRoute, 
 		private router: Router,
 		private companyService: CompanyService,
-		private navbarService: NavbarService
+		private navbarService: NavbarService,
+		private messageService: ElMessageService
 	) { }
 
 	ngOnInit() {
@@ -58,6 +60,9 @@ export class ListOrdersComponent implements OnInit, OnDestroy {
 			.subscribe((orderId) => {
 				let orderIndex = this.companyOrders.Orders.map(order => order.id).indexOf(OrderId);
 				this.companyOrders.Orders.splice(orderIndex, 1);
+				this.messageService.success("Pedido cancelado com sucesso");
+			}, () => {
+				this.messageService.error("Não foi possivel cancelar o pedido");
 			})
 	}
 
